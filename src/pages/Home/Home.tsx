@@ -6,13 +6,8 @@ function Home() {
     document.title = "Trang chủ";
   }, []);
   return (
-    <div className={"mt-5 flex w-full flex-col items-center justify-center"}>
-      <div className="w-4/5 bg-green-200">
-        <Announcement />
-        <Announcement />
-
-        <Announcement />
-      </div>
+    <div className={"flex w-full flex-col items-center justify-center"}>
+      <div className="w-4/5">Home</div>
     </div>
   );
 }

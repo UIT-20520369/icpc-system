@@ -8,10 +8,10 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className={"w-full"}>
-      <NavBar />
-      <Home />
-    </div>
+  <div className={"w-full"}>
+    <NavBar/>
+    <Home/>
+  </div>
   );
 }
 

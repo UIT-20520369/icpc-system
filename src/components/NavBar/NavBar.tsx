@@ -1,41 +1,47 @@
 import React, { useState } from "react";
-import logo_web from "./../../assets/logo_web.svg";
-import { Link } from "react-router-dom";
+import logo from "./../../assets/transparent-logo.svg";
+import { Link, NavLink } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
-
-type Item = {
-  key: String;
-  name: String;
-  to: String;
-};
-
-const menuItems: Item[] = [
-  {
-    key: "item-1",
-    name: "TRANG CHỦ",
-    to: "/"
-  },
-  {
-    key: "item-2",
-    name: "DANH SÁCH CUỘC THI",
-    to: "/contests"
-  },
-  {
-    key: "item-3",
-    name: "ĐĂNG KÝ ĐỘI",
-    to: "/teams"
-  }
-];
 
 function NavBar() {
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
   return (
-    <div className={"flex w-full flex-col items-center justify-center"}>
-      <div className={"flex  h-16 w-4/5 flex-row items-center justify-between"}>
-        <div className={"flex cursor-pointer flex-row items-center"}>
-          <img className={"h-14 w-14"} src={logo_web} alt="logo-web" />
-          <span className={"font-bold"}>Thi lập trình</span>
+    <div className={"mb-10 h-14 w-full border-b border-gray-200 bg-[#f9f9f9] drop-shadow-md"}>
+      <div className={"flex h-full flex-row items-center justify-between px-40"}>
+        <div className={"flex h-full items-center"}>
+          <Link to={"/"} className={"px-3"}>
+            <img className={"h-14 w-14"} src={logo} alt="logo-web" />
+          </Link>
+          <NavLink
+            className={({ isActive }) =>
+              `mx-3 inline-block flex h-full items-center justify-center px-2.5 text-gray-500 hover:bg-gray-200 hover:text-black ${
+                isActive ? "border-b-4 border-solid border-gray-500" : ""
+              }`
+            }
+            to={"/contests"}
+          >
+            Danh sách kỳ thi
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              `mx-3 inline-block flex h-full items-center justify-center px-2.5 text-gray-500 hover:bg-gray-200 hover:text-black ${
+                isActive ? "border-b-4 border-solid border-gray-500" : ""
+              }`
+            }
+            to={"/teams"}
+          >
+            Đăng ký đội
+          </NavLink>
+          <button
+            className={"mx-3 inline-block h-full px-2.5 text-gray-500 hover:bg-gray-200 hover:text-black"}
+            onClick={() => {
+              setIsLogin((prevState) => !prevState);
+            }}
+          >
+            {/*<Link to={"/contests"}>Thứ hạng</Link>*/}
+            Bảng xếp hạng
+          </button>
         </div>
 
         {!isLogin && (
@@ -60,22 +66,10 @@ function NavBar() {
         )}
 
         {isLogin && (
-          <div>
+          <Link to={"/profile"}>
             <FaRegUserCircle className={"h-8 w-8 cursor-pointer"} />
-          </div>
+          </Link>
         )}
-      </div>
-
-      <div className={"flex h-12 w-4/5 items-center rounded-lg border border-solid border-black"}>
-        <div className={"flex w-1/2 items-center justify-around"}>
-          {menuItems.map((item) => (
-            <Link key={item.key.toString()} className={"text-center border-b-2 border-black"} to={item.to.toString()}>
-              {item.name}
-            </Link>
-          ))}
-
-          <button onClick={() => setIsLogin(!isLogin)}>Login</button>
-        </div>
       </div>
     </div>
   );
